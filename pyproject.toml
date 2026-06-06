@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unloq-rag"
+version = "1.0.0"
+description = "Production-grade RAG system for policy Q&A"
+authors = [
+    {name = "Unloq Solutions Ltd", email = "engineering@unloq.io"}
+]
+readme = "README_STRUCTURE.md"
+requires-python = ">=3.10"
+license = {text = "Proprietary"}
+keywords = ["rag", "retrieval-augmented-generation", "policy", "qa", "embeddings", "pgvector"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "fastapi>=0.95.0",
+    "uvicorn[standard]>=0.22.0",
+    "sqlalchemy[asyncio]>=1.4.0",
+    "asyncpg>=0.27.0",
+    "pgvector>=0.6.0",
+    "pydantic-settings>=2.0.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "pymupdf>=1.24.0",
+    "sentence-transformers>=2.2.0",
+    "rank-bm25>=0.2.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://unloq.io"
+Documentation = "https://docs.unloq.io"
+Repository = "https://github.com/unloq/rag-policy-assistant"
+
+[tool.setuptools]
+packages = ["src.unloq_rag", "api", "config"]
+
+[tool.setuptools.package-dir]
+"" = "."
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
